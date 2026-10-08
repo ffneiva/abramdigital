@@ -1,0 +1,711 @@
+@import "tailwindcss";
+@import "./styles/fonts.css";
+
+/*
+ * Sistema visual da Abram Digital.
+ *
+ * A marca chegou pronta: o "A" em fios de ouro que se desfaz numa
+ * constelação. O site é a noite em que essa constelação aparece:
+ *
+ *   noite/carvão — o fundo: preto quente, nunca azulado
+ *   borda        — fios e divisórias, quase invisíveis
+ *   areia/creme  — o texto secundário
+ *   marfim       — o texto principal (branco quente, não #fff)
+ *   ouro         — a cor da marca. Em botão, ponto, palavra de ênfase e na
+ *                  constelação — nunca em texto corrido
+ *   ouro-claro / ouro-escuro — as pontas do degradê do metal
+ *
+ * Tipografia: Montserrat (o desenho do logotipo) nos títulos, com uma
+ * palavra em Instrument Serif itálico dourado — o contraste entre o
+ * geométrico pesado e o serifado fino é o que dá o ar de joia.
+ */
+@theme {
+  --color-noite: #070605;
+  --color-carvao: #0e0c0a;
+  --color-carvao-2: #16130f;
+  --color-borda: #2a251d;
+  --color-areia: #a39a8a;
+  --color-creme: #d9d1c2;
+  --color-marfim: #f3ede2;
+  --color-ouro: #d6b46a;
+  --color-ouro-claro: #f3dc9b;
+  --color-ouro-escuro: #8a6a2e;
+
+  --font-display: "Montserrat", "Arial", system-ui, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-sans: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Consolas, monospace;
+
+  --ease-sh: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-corte: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@layer base {
+  html {
+    background: var(--color-noite);
+    color: var(--color-marfim);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: auto;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    min-height: 100dvh;
+    overflow-x: clip;
+    background: var(--color-noite);
+  }
+
+  ::selection {
+    background: var(--color-ouro);
+    color: var(--color-noite);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ouro);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@utility container-x {
+  width: 100%;
+  max-width: 92rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (min-width: 640px) {
+    padding-inline: 2rem;
+  }
+  @media (min-width: 1024px) {
+    padding-inline: 3.5rem;
+  }
+}
+
+/* O título: Montserrat pesada, entrelinha apertada. */
+@utility titulo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+}
+
+/* A palavra de ênfase: serifada, itálica, em ouro — e um pouco maior, porque
+   a Instrument Serif tem a altura de x menor que a Montserrat. */
+@utility enfase {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  font-size: 1.08em;
+  padding-right: 0.06em;
+  background: linear-gradient(100deg, #f6e2a6 0%, #d2a952 40%, #9c7632 70%, #ecd08a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility rotulo {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Ouro polido — só em título grande. */
+@utility metal {
+  background: linear-gradient(
+    172deg,
+    #fff6dc 0%,
+    var(--color-ouro-claro) 22%,
+    var(--color-ouro) 48%,
+    var(--color-ouro-escuro) 66%,
+    #f0d796 86%,
+    #b48a3f 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Texto vazado: só o contorno. Para as palavras gigantes de fundo. */
+@utility vazado {
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in oklab, var(--color-marfim) 16%, transparent);
+}
+
+/*
+ * Texto legível sobre a constelação: uma sombra larga e escura atrás das
+ * letras. No celular, a constelação fica atrás do texto (e aparece
+ * através dos cartões de vidro) e é a sombra que garante o contraste.
+ */
+@utility legivel {
+  text-shadow:
+    0 1px 2px rgba(7, 6, 5, 0.9),
+    0 0 18px rgba(7, 6, 5, 0.85);
+}
+
+/* Texto em gradiente (background-clip) é transparente: a sombra de texto
+   apareceria POR DENTRO das letras. Nele, a sombra vira filtro. */
+[class*="legivel"] .metal,
+[class*="legivel"] .enfase,
+.metal.legivel {
+  text-shadow: none;
+  filter: drop-shadow(0 0 10px rgba(7, 6, 5, 0.85));
+}
+
+@utility fio {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, currentColor 12%, currentColor 88%, transparent);
+  opacity: 0.2;
+}
+
+/*
+ * A grade milimetrada do tapete de bancada: linhas finas a cada 8 px e uma
+ * mais forte a cada 40 px, em SVG embutido. Escala sem serrilhar e não pede
+ * requisição.
+ */
+@utility grade {
+  background-image:
+    linear-gradient(rgba(243, 237, 226, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(243, 237, 226, 0.035) 1px, transparent 1px),
+    linear-gradient(rgba(243, 237, 226, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(243, 237, 226, 0.015) 1px, transparent 1px);
+  background-size:
+    40px 40px,
+    40px 40px,
+    8px 8px,
+    8px 8px;
+}
+
+@utility grao {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.9 0 0 0 0 0.92 0 0 0 0 0.95 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Botões ─────────────────────────────────────────────────────────────── */
+
+@utility botao {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  min-height: 3.25rem;
+  padding: 0 1.7rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.005em;
+  isolation: isolate;
+  overflow: hidden;
+  transition:
+    color 400ms var(--ease-sh),
+    border-color 400ms var(--ease-sh),
+    transform 400ms var(--ease-sh);
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    transform: translateY(101%);
+    transition: transform 520ms var(--ease-sh);
+  }
+  &:hover::before {
+    transform: translateY(0);
+  }
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+/* O principal: ouro polido, e acende em marfim ao passar. */
+@utility botao-ouro {
+  background: linear-gradient(120deg, #f3dc9b, #d6b46a 45%, #b48a3f);
+  color: var(--color-noite);
+  box-shadow:
+    0 18px 50px -18px rgba(214, 180, 106, 0.7),
+    inset 0 1px 0 rgba(255, 246, 220, 0.6);
+  &::before {
+    background: var(--color-marfim);
+  }
+}
+
+@utility botao-marfim {
+  background: var(--color-marfim);
+  color: var(--color-noite);
+  &::before {
+    background: var(--color-ouro);
+  }
+}
+
+@utility botao-linha {
+  border: 1px solid color-mix(in oklab, var(--color-marfim) 24%, transparent);
+  color: var(--color-marfim);
+  &::before {
+    background: var(--color-marfim);
+  }
+  &:hover {
+    color: var(--color-noite);
+    border-color: var(--color-marfim);
+  }
+}
+
+/* ── Animações ──────────────────────────────────────────────────────────── */
+
+@keyframes marquee-x {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+@keyframes pulso {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+.pulso::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: currentColor;
+  animation: pulso 2.2s var(--ease-sh) infinite;
+}
+
+@keyframes flutua {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -12px, 0);
+  }
+}
+
+@keyframes pisca {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/* A varredura do laser: uma linha que desce pela caixa. */
+@keyframes varre {
+  0% {
+    transform: translateY(-10%);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(1100%);
+    opacity: 0;
+  }
+}
+
+/* ── Abertura ───────────────────────────────────────────────────────────── */
+
+@keyframes traco {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes preenche {
+  from {
+    fill-opacity: 0;
+  }
+  to {
+    fill-opacity: 1;
+  }
+}
+
+@keyframes sobe-suave {
+  from {
+    transform: translateY(40%);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes cortina-sobe {
+  to {
+    clip-path: inset(0 0 100% 0);
+  }
+}
+
+@keyframes selo-sai {
+  to {
+    transform: translateY(-30px) scale(0.92);
+    opacity: 0;
+  }
+}
+
+/* O "A" se desenha: cada fio percorre o próprio comprimento (pathLength=1),
+   escalonado por --i; depois cada nó acende do centro. */
+@keyframes no-acende {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.tracar line {
+  stroke-dasharray: 1;
+  animation: traco 650ms var(--ease-corte) both;
+  animation-delay: calc(var(--i, 0) * 9ms);
+}
+
+.tracar circle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: no-acende 520ms var(--ease-sh) both;
+  animation-delay: calc(480ms + var(--i, 0) * 22ms);
+}
+
+.abertura-sobe {
+  animation: sobe-suave 600ms var(--ease-sh) 450ms both;
+}
+
+.abertura-saindo {
+  animation: cortina-sobe 1000ms var(--ease-corte) 150ms both;
+}
+
+.abertura-saindo .abertura-selo {
+  animation: selo-sai 450ms var(--ease-corte) both;
+}
+
+/* ── Herói ──────────────────────────────────────────────────────────────── */
+
+/*
+ * REGRA: o estado escondido só existe com a classe `heroi-armado`. Sem ela —
+ * JS que não rodou, erro no meio do caminho — o título nasce visível.
+ */
+@keyframes linha-sobe {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes aparece {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.heroi-armado:not(.heroi-pronto) [data-linha] > span,
+.heroi-armado:not(.heroi-pronto) [data-surge] {
+  opacity: 0;
+}
+
+.heroi-pronto [data-linha] > span {
+  animation: linha-sobe 1100ms var(--ease-sh) both;
+  animation-delay: calc(var(--i, 0) * 110ms);
+}
+
+.heroi-pronto [data-surge] {
+  animation: aparece 900ms var(--ease-sh) both;
+  animation-delay: calc(450ms + var(--i, 0) * 90ms);
+}
+
+/* ── Menu em tela cheia ─────────────────────────────────────────────────── */
+
+@keyframes menu-abre {
+  from {
+    clip-path: circle(0% at calc(100% - 3rem) 2.5rem);
+  }
+  to {
+    clip-path: circle(150% at calc(100% - 3rem) 2.5rem);
+  }
+}
+
+@keyframes menu-fecha {
+  from {
+    clip-path: circle(150% at calc(100% - 3rem) 2.5rem);
+  }
+  to {
+    clip-path: circle(0% at calc(100% - 3rem) 2.5rem);
+  }
+}
+
+@keyframes menu-item {
+  from {
+    opacity: 0;
+    transform: translateY(40%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.menu-painel {
+  animation: menu-abre 800ms var(--ease-corte) both;
+}
+
+.menu-painel.menu-saindo {
+  animation: menu-fecha 450ms var(--ease-corte) both;
+  pointer-events: none;
+}
+
+.menu-item {
+  animation: menu-item 700ms var(--ease-sh) both;
+  animation-delay: calc(200ms + var(--i, 0) * 60ms);
+}
+
+/* ── Títulos: a varredura do laser ──────────────────────────────────────── */
+
+/*
+ * O texto se revela da esquerda para a direita (clip-path num retângulo) e
+ * um feixe verde corre na frente, na mesma curva e na mesma duração — a
+ * leitura de um scanner passando. O feixe é a borda direita de um trilho que
+ * atravessa o título com `transform`.
+ */
+.corte {
+  position: relative;
+}
+
+.corte-texto {
+  transition: clip-path 1100ms var(--ease-corte);
+}
+
+.corte[data-corte="armado"] .corte-texto {
+  clip-path: inset(-0.3em 100% -0.3em 0);
+}
+
+.corte[data-corte="feito"] .corte-texto {
+  clip-path: inset(-0.3em -0.2em -0.3em 0);
+}
+
+.corte-trilho {
+  position: absolute;
+  inset: -8% 0;
+  pointer-events: none;
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.corte-lamina {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, #ffffff 18%, var(--color-ouro) 82%, transparent);
+  box-shadow:
+    0 0 14px 3px rgba(214, 180, 106, 0.7),
+    0 0 42px 10px rgba(214, 180, 106, 0.25);
+}
+
+@keyframes lamina-corre {
+  0% {
+    transform: translateX(-100%);
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+}
+
+.corte[data-corte="feito"] .corte-trilho {
+  animation: lamina-corre 1100ms var(--ease-corte) both;
+}
+
+/* ── Vidro ───────────────────────────────────────────────────────────────── */
+
+/* O cartão de vidro escuro sobre a constelação: as partículas aparecem
+   desfocadas por trás, e o texto continua com contraste. */
+@utility vidro {
+  background: linear-gradient(160deg, rgba(22, 19, 15, 0.72), rgba(10, 9, 7, 0.6));
+  border: 1px solid rgba(243, 237, 226, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(243, 220, 155, 0.08),
+    0 30px 80px -40px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+}
+
+/* ── Trabalhos ──────────────────────────────────────────────────────────── */
+
+/* A inclinação 3D segue o ponteiro (variáveis postas pelo componente), e o
+   brilho acompanha o mesmo ponto. */
+.inclina {
+  --rx: 0deg;
+  --ry: 0deg;
+  transform: perspective(1400px) rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 700ms var(--ease-sh);
+  transform-style: preserve-3d;
+}
+
+.janela {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.1rem;
+  background: var(--color-carvao);
+  border: 1px solid rgba(243, 237, 226, 0.1);
+  box-shadow:
+    0 40px 90px -40px color-mix(in oklab, var(--cor, #d6b46a) 55%, transparent),
+    0 0 0 1px rgba(0, 0, 0, 0.4);
+  transition: box-shadow 700ms var(--ease-sh);
+}
+
+.janela::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    500px circle at var(--mx, 50%) var(--my, 0%),
+    rgba(255, 244, 214, 0.12),
+    transparent 45%
+  );
+  opacity: 0;
+  transition: opacity 500ms;
+}
+
+.inclina:hover .janela::after {
+  opacity: 1;
+}
+
+.trilho-trabalhos {
+  scrollbar-width: none;
+}
+
+.trilho-trabalhos::-webkit-scrollbar {
+  display: none;
+}
+
+/* Com o motor no desktop, quem move a fila é o GSAP (seção pinada). */
+@media (min-width: 1024px) and (pointer: fine) {
+  [data-armada] .trilho-trabalhos {
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+}
+
+/* ── Não fazemos: o risco de ouro ───────────────────────────────────────── */
+
+.risco {
+  position: absolute;
+  left: -0.1em;
+  right: -0.1em;
+  top: 55%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--color-ouro-claro),
+    var(--color-ouro),
+    var(--color-ouro-escuro)
+  );
+  box-shadow: 0 0 12px rgba(214, 180, 106, 0.6);
+  transform-origin: left;
+  transform: scaleX(1);
+  transition: transform 900ms var(--ease-corte);
+}
+
+/* O risco só começa recolhido se o Reveal está escondendo a linha (o mesmo
+   estado de "ainda não entrou"); sem JS, nasce riscado. */
+.riscado[style*="opacity: 0"] .risco {
+  transform: scaleX(0);
+}
+
+/* ── Método: as etapas acendem ─────────────────────────────────────────── */
+
+[data-armada] .etapa {
+  transition: opacity 700ms var(--ease-sh);
+}
+
+[data-armada] .etapa:not([data-acesa]) {
+  opacity: 0.28;
+}
+
+.no-etapa {
+  transition:
+    box-shadow 700ms var(--ease-sh),
+    transform 700ms var(--ease-sh);
+}
+
+[data-acesa] .no-etapa {
+  box-shadow:
+    0 0 0 6px rgba(214, 180, 106, 0.12),
+    0 0 26px rgba(214, 180, 106, 0.7);
+  transform: scale(1.12);
+}
+
+/* ── Movimento reduzido: caminho alternativo completo ───────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+
+  .heroi-armado [data-linha] > span,
+  .heroi-armado [data-surge] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
