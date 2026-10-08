@@ -1,0 +1,36 @@
+{
+  "name": "Abram Digital — sites e tráfego pago",
+  "short_name": "Abram",
+  "description": "O anúncio traz. O site convence.",
+  "lang": "pt-BR",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#070605",
+  "theme_color": "#070605",
+  "icons": [
+    {
+      "src": "/icon-192.png?v=cb843fca",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png?v=d0ad2bab",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192.png?v=cb843fca",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-512.png?v=d0ad2bab",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
