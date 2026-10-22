@@ -60,7 +60,7 @@ Lista viva: marque `[x]` quando fizer. Em ordem de impacto.
 
 ### Esta semana
 
-- [ ] **Perfil da Empresa no Google** (já existe: g.page/r/Cf8gSaM7nu8FECE). Conferir nome "Abram Digital", telefone (62) 9355-7730 igual ao do site, site https://abramdigital.com.br, categoria "Agência de marketing" e "Web designer", serviços com os mesmos nomes das páginas, fotos.
+- [ ] **Perfil da Empresa no Google** (já existe: g.page/r/Cf8gSaM7nu8FECE). Conferir nome "Abram Digital", telefone (62) 99355-7730 igual ao do site, site https://abramdigital.com.br, categoria "Agência de marketing" e "Web designer", serviços com os mesmos nomes das páginas, fotos.
 - [ ] **Confirmar o WhatsApp.** O número tem 8 dígitos depois do DDD; se a conta usa o 9, trocar em `src/lib/business.ts` e no Perfil da Empresa (dados divergentes atrapalham).
 - [ ] **CNPJ e e-mail.** Quando houver, entram no rodapé e nos dados estruturados (`business.ts`), o que reforça a confiança da entidade.
 - [ ] **Mesmos dados em todo lugar (NAP).** Nome, telefone, site e cidade idênticos no Instagram @abramdigital.br, Facebook, LinkedIn e diretórios (Apontador, Guia Mais, Cylex).

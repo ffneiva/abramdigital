@@ -29,12 +29,12 @@ export const EMPRESA = {
   descricao:
     'Sites sob medida e tráfego pago no Google e no Meta, feitos pela mesma equipe, para o clique que você paga cair numa página feita para virar conversa.',
   /**
-   * O WhatsApp, só dígitos com DDI e DDD. Passado pelo Felipe em 06/10/2026
-   * como "+55 62 9355-7730". CONFIRMAR: tem 8 dígitos depois do DDD; se a
-   * conta foi criada com o 9 na frente, trocar por 5562993557730.
+   * O WhatsApp, só dígitos com DDI e DDD (+55 62 99355-7730).
+   * Celular sempre com 9 dígitos depois do DDD
+   * (confirmado pelo Felipe em 22/10/2026).
    */
-  whatsapp: '556293557730',
-  telefone: '(62) 9355-7730',
+  whatsapp: '5562993557730',
+  telefone: '(62) 99355-7730',
   /** O perfil do Instagram, sem @ (passado pelo Carmelito em 06/10/2026). */
   instagram: 'abramdigital.br' as string | null,
   /** O perfil no Google Maps (Google Business), pronto desde 06/10/2026. */
@@ -678,6 +678,6 @@ export const PRIVACIDADE = [
   },
   {
     titulo: 'Seus direitos',
-    texto: `A Lei Geral de Proteção de Dados (Lei 13.709/2018) garante acesso, correção e exclusão dos seus dados. Como o site não guarda dados pessoais, o que existir estará na conversa do WhatsApp, e pode ser pedido por lá, no (62) 9355-7730.`,
+    texto: `A Lei Geral de Proteção de Dados (Lei 13.709/2018) garante acesso, correção e exclusão dos seus dados. Como o site não guarda dados pessoais, o que existir estará na conversa do WhatsApp, e pode ser pedido por lá, no (62) 99355-7730.`,
   },
 ] as const
