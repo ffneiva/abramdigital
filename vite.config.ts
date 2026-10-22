@@ -7,7 +7,7 @@ import react from '@vitejs/plugin-react'
 import { defineConfig, type Plugin } from 'vite'
 import { EMPRESA, INDEXAVEL, linkContato, SITE_URL } from './src/lib/business.ts'
 import { canonicalDe, NAO_ENCONTRADA, ogArquivoDe, ogUrlDe, ROTAS } from './src/lib/routes.ts'
-import { gerarJsonLd, gerarLlmsTxt } from './src/lib/seo.ts'
+import { gerarJsonLd, gerarLlmsFullTxt, gerarLlmsTxt } from './src/lib/seo.ts'
 
 /**
  * Diretiva de robôs.
@@ -65,7 +65,7 @@ function noscript(): string {
   const estilo = 'color: #d6b46a'
   return `<noscript>
       <div style="padding: 3rem 1.5rem; font-family: Arial, sans-serif; color: #f3ede2; background: #070605">
-        <h1 style="font-size: 1.8rem; margin: 0 0 1rem">${escapar(EMPRESA.nome)}</h1>
+        <p style="font-size: 1.8rem; margin: 0 0 1rem; font-weight: 700">${escapar(EMPRESA.nome)}</p>
         <p>${escapar(EMPRESA.lema)} ${escapar(EMPRESA.descricao)}</p>
         <p>
           <a href="${escapar(linkContato())}" style="${estilo}">Conversar no WhatsApp</a> ·
@@ -207,11 +207,12 @@ function seoPlugin(): Plugin {
         type: 'asset',
         fileName: 'robots.txt',
         source: INDEXAVEL
-          ? `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`
+          ? `User-agent: *\nAllow: /\n\n# Assistentes de IA: liberados (resumo em ${SITE_URL}/llms.txt)\nUser-agent: GPTBot\nUser-agent: OAI-SearchBot\nUser-agent: ChatGPT-User\nUser-agent: ClaudeBot\nUser-agent: Claude-SearchBot\nUser-agent: PerplexityBot\nUser-agent: Google-Extended\nUser-agent: Applebot-Extended\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`
           : 'User-agent: *\nAllow: /\n',
       })
 
       this.emitFile({ type: 'asset', fileName: 'llms.txt', source: gerarLlmsTxt() })
+      this.emitFile({ type: 'asset', fileName: 'llms-full.txt', source: gerarLlmsFullTxt() })
     },
   }
 }

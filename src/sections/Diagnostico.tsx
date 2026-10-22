@@ -25,7 +25,7 @@ export function Diagnostico() {
             rotulo="Diagnóstico · 30 segundos"
             titulo="Por onde"
             enfase="começar?"
-            apoio="Quatro toques. No fim, um ponto de partida honesto e a mensagem pronta para mandar — sem formulário, sem e-mail, sem cadastro."
+            apoio="Quatro toques. No fim, um ponto de partida honesto e a mensagem pronta para mandar, sem formulário, sem e-mail, sem cadastro."
           />
 
           <div className="vidro mt-12 rounded-[1.75rem] p-6 sm:p-9">

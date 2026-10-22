@@ -10,6 +10,8 @@
  * resultado: os três saem da conversa, por escrito, na proposta.
  */
 
+import { type Detalhe, EXTRAS } from './paginasDetalhe.ts'
+
 export type PaginaServico = {
   slug: string
   /** O nome curto — trilha, menus, links. */
@@ -30,10 +32,12 @@ export type PaginaServico = {
   /** Como funciona, em passos. */
   passos: { titulo: string; texto: string }[]
   perguntas: { pergunta: string; resposta: string }[]
+  /** Blocos de texto corrido ("Em detalhe"), de paginasDetalhe.ts. */
+  detalhe?: Detalhe[]
   mensagem: string
 }
 
-export const PAGINAS: PaginaServico[] = [
+const BASE: PaginaServico[] = [
   {
     slug: 'criacao-de-sites-goiania',
     nome: 'Criação de sites',
@@ -43,7 +47,7 @@ export const PAGINAS: PaginaServico[] = [
     h1: 'Criação de sites em Goiânia',
     og: ['Criação de sites', 'em Goiânia.'],
     resumo:
-      'Um site desenhado só para o seu negócio — sem tema comprado, sem construtor de arrastar. Rápido no celular, com cada página pronta para o Google e cada botão abrindo o WhatsApp com a mensagem já escrita.',
+      'Um site desenhado só para o seu negócio, sem tema comprado, sem construtor de arrastar. Rápido no celular, com cada página pronta para o Google e cada botão abrindo o WhatsApp com a mensagem já escrita.',
     quando: [
       'Você não tem site e depende só do Instagram para ser encontrado',
       'O seu site é um modelo pronto, igual ao dos concorrentes',
@@ -52,7 +56,7 @@ export const PAGINAS: PaginaServico[] = [
     ],
     entregamos: [
       'Roteiro das seções e texto escritos a partir da nossa conversa',
-      'Design sob medida — com animação e 3D quando fazem sentido para a marca',
+      'Design sob medida, com animação e 3D quando fazem sentido para a marca',
       'Título, descrição e prévia de WhatsApp próprios em cada página',
       'Dados estruturados para o Google, mapa do site e robots.txt',
       'Cliques no WhatsApp medidos como conversão, prontos para anúncio',
@@ -83,7 +87,7 @@ export const PAGINAS: PaginaServico[] = [
       {
         pergunta: 'O site já sai pronto para aparecer no Google?',
         resposta:
-          'Sai com tudo o que depende do site: título e descrição por página, dados estruturados, mapa do site, velocidade e conteúdo escrito para o que o seu cliente procura. A posição na busca depende também de concorrência e tempo — e ninguém pode prometê-la.',
+          'Sai com tudo o que depende do site: título e descrição por página, dados estruturados, mapa do site, velocidade e conteúdo escrito para o que o seu cliente procura. A posição na busca depende também de concorrência e tempo, e ninguém pode prometê-la.',
       },
       {
         pergunta: 'Preciso ter textos e fotos prontos?',
@@ -98,7 +102,7 @@ export const PAGINAS: PaginaServico[] = [
       {
         pergunta: 'Atendem fora de Goiânia?',
         resposta:
-          'Sim. A conversa é por WhatsApp e videochamada — já entregamos sites para negócios de Goiás e de Minas Gerais.',
+          'Sim. A conversa é por WhatsApp e videochamada: já entregamos sites para negócios de Goiás e de Minas Gerais.',
       },
     ],
     mensagem: 'Olá, Abram! Vim pela página de criação de sites e quero conversar sobre o meu.',
@@ -112,7 +116,7 @@ export const PAGINAS: PaginaServico[] = [
     h1: 'Landing page para anúncios',
     og: ['Landing page', 'para anúncios.'],
     resumo:
-      'Uma página feita para receber o clique: repete a promessa do anúncio, apresenta uma oferta e leva a um próximo passo só. A experiência na página de destino é um dos três componentes do Índice de Qualidade do Google Ads — a página pesa na conta do anúncio.',
+      'Uma página feita para receber o clique: repete a promessa do anúncio, apresenta uma oferta e leva a um próximo passo só. A experiência na página de destino é um dos três componentes do Índice de Qualidade do Google Ads, a página pesa na conta do anúncio.',
     quando: [
       'Você vai rodar campanha no Google ou no Meta',
       'O anúncio leva para a página inicial e a pessoa se perde',
@@ -120,7 +124,7 @@ export const PAGINAS: PaginaServico[] = [
       'Você quer comparar duas versões de página',
     ],
     entregamos: [
-      'Texto com a mesma promessa do anúncio — quem clica encontra o que leu',
+      'Texto com a mesma promessa do anúncio, quem clica encontra o que leu',
       'Um objetivo por página: WhatsApp, cadastro ou compra',
       'Carregamento rápido em rede móvel',
       'Eventos de conversão no GA4, no Google Ads e no Pixel do Meta',
@@ -143,7 +147,7 @@ export const PAGINAS: PaginaServico[] = [
       },
       {
         titulo: 'Ajuste',
-        texto: 'Com os números na mão, mudamos o que não converte — na página ou no anúncio.',
+        texto: 'Com os números na mão, mudamos o que não converte, na página ou no anúncio.',
       },
     ],
     perguntas: [
@@ -155,7 +159,7 @@ export const PAGINAS: PaginaServico[] = [
       {
         pergunta: 'A landing page funciona sem anúncio?',
         resposta:
-          'Funciona, mas ela é pensada para receber tráfego: alguém precisa chegar até ela — anúncio, link na bio, QR code ou campanha de e-mail.',
+          'Funciona, mas ela é pensada para receber tráfego: alguém precisa chegar até ela: anúncio, link na bio, QR code ou campanha de e-mail.',
       },
       {
         pergunta: 'Vocês fazem a campanha também?',
@@ -174,7 +178,7 @@ export const PAGINAS: PaginaServico[] = [
     h1: 'Gestão de Google Ads em Goiânia',
     og: ['Google Ads', 'em Goiânia.'],
     resumo:
-      'Campanhas para aparecer quando alguém procura o que você vende — em Goiânia ou onde estiver o seu cliente. Pesquisa, Performance Max e YouTube, com as conversões medidas desde o primeiro dia.',
+      'Campanhas para aparecer quando alguém procura o que você vende, em Goiânia ou onde estiver o seu cliente. Pesquisa, Performance Max e YouTube, com as conversões medidas desde o primeiro dia.',
     quando: [
       'O seu cliente procura o seu serviço no Google',
       'Você já anuncia, mas não sabe de onde vêm as conversas',
@@ -232,11 +236,11 @@ export const PAGINAS: PaginaServico[] = [
     nome: 'Meta Ads',
     titulo: 'Anúncios no Instagram e Facebook · Abram Digital',
     descricao:
-      'Meta Ads com objetivo de mensagens, cadastro ou venda — não impulsionar post. Públicos, criativos e Pixel com API de conversões, de Goiânia para o Brasil.',
+      'Meta Ads com objetivo de mensagens, cadastro ou venda, não impulsionar post. Públicos, criativos e Pixel com API de conversões, de Goiânia para o Brasil.',
     h1: 'Anúncios no Instagram e no Facebook',
     og: ['Instagram e', 'Facebook Ads.'],
     resumo:
-      'Campanhas no Meta Ads com objetivo de mensagens, cadastro ou venda — e não "impulsionar publicação". Públicos, criativos e o Pixel com a API de conversões, para o algoritmo aprender com quem de fato chamou você.',
+      'Campanhas no Meta Ads com objetivo de mensagens, cadastro ou venda, e não "impulsionar publicação". Públicos, criativos e o Pixel com a API de conversões, para o algoritmo aprender com quem de fato chamou você.',
     quando: [
       'Você impulsiona posts e não vê retorno em conversa',
       'O seu cliente ainda não sabe que precisa de você',
@@ -258,7 +262,7 @@ export const PAGINAS: PaginaServico[] = [
       {
         titulo: 'Objetivo certo',
         texto:
-          'A campanha otimiza para o que você quer — conversa, cadastro ou venda —, não para curtida.',
+          'A campanha otimiza para o que você quer (conversa, cadastro ou venda), não para curtida.',
       },
       {
         titulo: 'Criativos',
@@ -291,6 +295,14 @@ export const PAGINAS: PaginaServico[] = [
     mensagem: 'Olá, Abram! Vim pela página de anúncios no Instagram e quero conversar.',
   },
 ]
+
+/** As páginas com o aprofundamento (blocos e perguntas a mais) de paginasDetalhe.ts. */
+export const PAGINAS: PaginaServico[] = BASE.map((p) => {
+  const extra = EXTRAS[p.slug]
+  return extra
+    ? { ...p, detalhe: extra.detalhe, perguntas: [...p.perguntas, ...extra.perguntas] }
+    : p
+})
 
 export function paginaDe(slug: string): PaginaServico | undefined {
   return PAGINAS.find((p) => p.slug === slug)

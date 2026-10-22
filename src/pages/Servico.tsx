@@ -5,6 +5,7 @@ import { Reveal } from '@/components/Reveal'
 import { TopoPagina } from '@/components/TopoPagina'
 import { TRABALHOS_PUBLICADOS } from '@/lib/business'
 import { PAGINAS, paginaDe } from '@/lib/paginas'
+import { PROJETOS } from '@/lib/projetos'
 
 /**
  * Página de serviço (/servicos/<slug>/) — a resposta para quem chega do
@@ -108,6 +109,22 @@ export default function Servico({ slug }: { slug: string }) {
               </Reveal>
             ))}
           </ol>
+          {p.detalhe && (
+            <div className="mt-20 grid gap-x-16 gap-y-12 lg:grid-cols-2">
+              {p.detalhe.map((d) => (
+                <Reveal key={d.titulo}>
+                  <h3 className="font-display text-[clamp(1.4rem,2.4vw,1.9rem)] font-bold tracking-[-0.02em] text-marfim">
+                    {d.titulo}
+                  </h3>
+                  {d.texto.map((t) => (
+                    <p key={t} className="mt-4 text-[1.02rem] leading-relaxed text-creme">
+                      {t}
+                    </p>
+                  ))}
+                </Reveal>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -151,6 +168,17 @@ export default function Servico({ slug }: { slug: string }) {
             <a href="/#trabalhos" className="botao botao-linha mt-8">
               Ver os trabalhos em vídeo
             </a>
+            <p className="mt-8 font-mono text-xs text-areia">
+              Estudos de caso:{' '}
+              {PROJETOS.map((pr, i) => (
+                <span key={pr.slug}>
+                  {i > 0 && ' · '}
+                  <a href={`/projetos/${pr.slug}/`} className="text-ouro-claro hover:underline">
+                    {pr.nome}
+                  </a>
+                </span>
+              ))}
+            </p>
           </div>
           <div>
             <p className="rotulo text-ouro">Outros serviços</p>

@@ -1,5 +1,6 @@
 import { SITE_URL } from './business.ts'
 import { PAGINAS } from './paginas.ts'
+import { PROJETOS, SOBRE } from './projetos.ts'
 
 /**
  * As rotas do site e o `<head>` de cada uma.
@@ -19,6 +20,8 @@ export type Rota = {
   noindex?: boolean
   /** Página de serviço: o slug do conteúdo em lib/paginas.ts. */
   pagina?: string
+  /** Estudo de caso: o slug em lib/projetos.ts. */
+  projeto?: string
   /** As duas linhas grandes da arte de compartilhamento. */
   og?: readonly [string, string]
   ogNota?: string
@@ -30,7 +33,7 @@ export const ROTAS: Rota[] = [
     rotulo: 'Início',
     titulo: 'Criação de sites e tráfego pago em Goiânia · Abram Digital',
     descricao:
-      'Sites sob medida e anúncios no Google e no Instagram, feitos pela mesma equipe em Goiânia — para o clique que você paga virar conversa no WhatsApp.',
+      'Sites sob medida e anúncios no Google e no Instagram, feitos pela mesma equipe em Goiânia, para o clique que você paga virar conversa no WhatsApp.',
     og: ['O anúncio traz.', 'O site convence.'],
     ogNota: 'Sites sob medida · Tráfego pago · abramdigital.com.br',
   },
@@ -44,6 +47,24 @@ export const ROTAS: Rota[] = [
     og: p.og,
     ogNota: 'Abram Digital · Goiânia · abramdigital.com.br',
   })),
+  // Estudos de caso: quem procura "site para empreendimento" ou "site de loteamento".
+  ...PROJETOS.map((p) => ({
+    path: `/projetos/${p.slug}`,
+    rotulo: p.nome,
+    titulo: p.titulo,
+    descricao: p.descricao,
+    projeto: p.slug,
+    og: p.og,
+    ogNota: 'Estudo de caso · Abram Digital · abramdigital.com.br',
+  })),
+  {
+    path: '/sobre',
+    rotulo: 'Sobre',
+    titulo: SOBRE.titulo,
+    descricao: SOBRE.descricao,
+    og: ['A mesma equipe', 'nas duas pontas.'],
+    ogNota: 'Abram Digital · Goiânia · abramdigital.com.br',
+  },
   {
     path: '/politica-de-privacidade',
     rotulo: 'Privacidade',

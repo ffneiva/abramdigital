@@ -45,7 +45,7 @@ export function Metodo() {
           rotulo="Método"
           titulo="Seis pontos."
           enfase="Uma linha só."
-          apoio="Do primeiro café ao ajuste da campanha, a mesma equipe segura o fio — e ninguém culpa o outro lado."
+          apoio="Do primeiro café ao ajuste da campanha, a mesma equipe segura o fio, e ninguém culpa o outro lado."
           className="mx-auto max-w-[46rem]"
         />
         <ol data-etapas className="relative mx-auto mt-20 max-w-[64rem]">

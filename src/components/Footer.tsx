@@ -95,13 +95,28 @@ export function Footer() {
                   Dúvidas
                 </a>
               </li>
+              <li>
+                <a href="/projetos/paradizzo/" className="hover:text-marfim">
+                  Estudo de caso: Paradizzo
+                </a>
+              </li>
+              <li>
+                <a href="/projetos/ponta-da-vila/" className="hover:text-marfim">
+                  Estudo de caso: Ponta da Vila
+                </a>
+              </li>
+              <li>
+                <a href="/sobre/" className="hover:text-marfim">
+                  Sobre a Abram
+                </a>
+              </li>
             </ul>
           </div>
           <div>
             <p className="rotulo mb-3 text-ouro">Onde</p>
             {EMPRESA.cidade && (
               <p className="text-marfim">
-                {EMPRESA.cidade} – {EMPRESA.uf}
+                {EMPRESA.cidade}, {EMPRESA.uf}
               </p>
             )}
             <p className="mt-1">Atendemos negócios de qualquer cidade do Brasil.</p>

@@ -27,7 +27,7 @@ export const EMPRESA = {
   dominio: 'abramdigital.com.br',
   lema: 'O anúncio traz. O site convence.',
   descricao:
-    'Sites sob medida e tráfego pago no Google e no Meta, feitos pela mesma equipe — para o clique que você paga cair numa página feita para virar conversa.',
+    'Sites sob medida e tráfego pago no Google e no Meta, feitos pela mesma equipe, para o clique que você paga cair numa página feita para virar conversa.',
   /**
    * O WhatsApp, só dígitos com DDI e DDD. Passado pelo Felipe em 06/10/2026
    * como "+55 62 9355-7730". CONFIRMAR: tem 8 dígitos depois do DDD; se a
@@ -66,7 +66,7 @@ export const HEROI = {
   /** A palavra de cada linha que vai em itálico dourado. */
   enfase: ['traz.', 'convence.'],
   texto:
-    'A Abram Digital faz as duas metades — o site e as campanhas no Google e no Meta — pensadas juntas, pela mesma equipe. Assim, cada real que você investe em clique cai numa página feita para virar conversa.',
+    'A Abram Digital faz as duas metades (o site e as campanhas no Google e no Meta), pensadas juntas, pela mesma equipe. Assim, cada real que você investe em clique cai numa página feita para virar conversa.',
   secundario: 'Ver trabalhos',
 } as const
 
@@ -109,7 +109,7 @@ export const METADES: Metade[] = [
     titulo: 'O site',
     enfase: 'que convence.',
     texto:
-      'Desenhado do zero para o seu negócio — sem tema comprado, sem construtor de arrastar. Rápido no celular, encontrado no Google e com um caminho só: a conversa com você.',
+      'Desenhado do zero para o seu negócio, sem tema comprado, sem construtor de arrastar. Rápido no celular, encontrado no Google e com um caminho só: a conversa com você.',
     itens: [
       'Design sob medida, do conceito ao último pixel',
       'Carrega rápido em rede móvel',
@@ -123,7 +123,7 @@ export const METADES: Metade[] = [
     titulo: 'O tráfego',
     enfase: 'que traz.',
     texto:
-      'Campanhas no Google e no Meta (Instagram e Facebook) apontadas para páginas feitas para elas. A mesma promessa no anúncio e na página — e a medição ligada antes do primeiro real.',
+      'Campanhas no Google e no Meta (Instagram e Facebook) apontadas para páginas feitas para elas. A mesma promessa no anúncio e na página, e a medição ligada antes do primeiro real.',
     itens: [
       'Google Ads: pesquisa, Performance Max e YouTube',
       'Meta Ads: Instagram e Facebook',
@@ -189,7 +189,7 @@ export const SERVICOS: Servico[] = [
     nome: 'Sites institucionais',
     resumo: 'A casa do seu negócio na internet, feita só para ele.',
     detalhe:
-      'Começa por entender o que o seu cliente procura e o que só você pode dizer. Daí sai o roteiro das seções, o texto e o design — e só então o código. Cada página sai com título, descrição e prévia de compartilhamento próprios.',
+      'Começa por entender o que o seu cliente procura e o que só você pode dizer. Daí sai o roteiro das seções, o texto e o design, e só então o código. Cada página sai com título, descrição e prévia de compartilhamento próprios.',
     itens: [
       'Roteiro e texto',
       'Design sob medida',
@@ -201,7 +201,7 @@ export const SERVICOS: Servico[] = [
     id: 'landing',
     pagina: 'landing-page-para-anuncios',
     nome: 'Landing pages para campanha',
-    resumo: 'Uma página, uma oferta, um botão — feita para o anúncio.',
+    resumo: 'Uma página, uma oferta, um botão. Feita para o anúncio.',
     detalhe:
       'A página que recebe o clique precisa repetir a promessa do anúncio e ter um próximo passo só. Montamos a landing junto com a campanha, para as duas falarem a mesma língua.',
     itens: [
@@ -217,7 +217,7 @@ export const SERVICOS: Servico[] = [
     nome: 'Google Ads',
     resumo: 'Aparecer para quem já está procurando o que você vende.',
     detalhe:
-      'Campanhas de pesquisa para quem digita o seu serviço, Performance Max e YouTube quando fazem sentido. Palavras-chave negativas, extensões e conversões configuradas — e o orçamento acompanhado de perto.',
+      'Campanhas de pesquisa para quem digita o seu serviço, Performance Max e YouTube quando fazem sentido. Palavras-chave negativas, extensões e conversões configuradas, e o orçamento acompanhado de perto.',
     itens: ['Pesquisa', 'Performance Max', 'YouTube', 'Conversões no GA4'],
   },
   {
@@ -226,13 +226,13 @@ export const SERVICOS: Servico[] = [
     nome: 'Meta Ads',
     resumo: 'Instagram e Facebook, para quem ainda não sabe que precisa.',
     detalhe:
-      'Campanhas com objetivo de mensagens, cadastro ou venda — não "impulsionar publicação". Públicos, criativos e o Pixel com a API de conversões, para o algoritmo aprender com quem de fato chamou.',
+      'Campanhas com objetivo de mensagens, cadastro ou venda, não "impulsionar publicação". Públicos, criativos e o Pixel com a API de conversões, para o algoritmo aprender com quem de fato chamou.',
     itens: ['Mensagens no WhatsApp', 'Cadastros', 'Remarketing', 'Pixel + API de conversões'],
   },
   {
     id: 'medicao',
     nome: 'Medição',
-    resumo: 'Saber de onde veio cada conversa — e o que ela custou.',
+    resumo: 'Saber de onde veio cada conversa e o que ela custou.',
     detalhe:
       'Google Tag Manager, GA4, Pixel e API de conversões ligados antes do primeiro anúncio. Sem medição, otimizar campanha é chute.',
     itens: ['Tag Manager', 'GA4', 'Eventos de clique no WhatsApp', 'Painel de resultados'],
@@ -242,7 +242,7 @@ export const SERVICOS: Servico[] = [
     nome: 'Identidade visual',
     resumo: 'Quando o negócio ainda não tem cara, a gente desenha.',
     detalhe:
-      'Símbolo, cores, tipografia e um manual de uso — criados junto com o site, para a marca já nascer pensada para a tela, o favicon e a foto de perfil.',
+      'Símbolo, cores, tipografia e um manual de uso, criados junto com o site, para a marca já nascer pensada para a tela, o favicon e a foto de perfil.',
     itens: ['Símbolo e logotipo', 'Paleta e fontes', 'Manual de uso', 'Arquivos para redes'],
   },
 ]
@@ -289,7 +289,7 @@ export const TRABALHOS: Trabalho[] = [
     cidade: 'Goiânia',
     feito: 'Landing page e diagnóstico interativo',
     destaque:
-      'Um setor cheio de promessa enganosa — e um site que transforma a recusa em prometer no argumento de venda.',
+      'Um setor cheio de promessa enganosa, e um site que transforma a recusa em prometer no argumento de venda.',
     url: 'https://delamayer.com.br',
     cor: '#c9a46a',
     publicar: true,
@@ -362,7 +362,7 @@ export const ETAPAS: Etapa[] = [
     numero: '01',
     titulo: 'Conversa',
     texto:
-      'Entender o negócio, quem compra e por quê. O que você vende que os outros não vendem — e o que o seu cliente digita quando procura.',
+      'Entender o negócio, quem compra e por quê. O que você vende que os outros não vendem, e o que o seu cliente digita quando procura.',
   },
   {
     numero: '02',
@@ -392,7 +392,7 @@ export const ETAPAS: Etapa[] = [
     numero: '06',
     titulo: 'Ajuste',
     texto:
-      'Ler os números, cortar o que não funciona e reforçar o que funciona. Na campanha e na página — porque somos nós dos dois lados.',
+      'Ler os números, cortar o que não funciona e reforçar o que funciona. Na campanha e na página, porque somos nós dos dois lados.',
   },
 ]
 
@@ -491,7 +491,7 @@ export function montarPlano(r: Respostas): Plano {
             : 'Site com cada botão abrindo o WhatsApp com a mensagem escrita',
     )
   } else {
-    passos.push('Conferir a página que vai receber os anúncios — ela pesa no custo do clique')
+    passos.push('Conferir a página que vai receber os anúncios, ela pesa no custo do clique')
   }
 
   passos.push('Medição: Tag Manager, GA4 e Pixel, antes do primeiro anúncio')
@@ -514,7 +514,7 @@ export function montarPlano(r: Respostas): Plano {
     r.hoje === 'impulsiono'
       ? 'Impulsionar publicação é o anúncio mais simples do Meta, mas ele não escolhe o objetivo que você precisa. Campanha com objetivo de mensagens costuma ser o próximo passo.'
       : r.hoje === 'agencia'
-        ? 'Se você já tem quem cuide dos anúncios, o site pode ser feito para trabalhar junto com essa equipe — a gente entrega a medição pronta para ela.'
+        ? 'Se você já tem quem cuide dos anúncios, o site pode ser feito para trabalhar junto com essa equipe, a gente entrega a medição pronta para ela.'
         : r.hoje === 'proprio'
           ? 'Você já conhece o painel. Antes de aumentar o orçamento, vale olhar a página de destino e a medição: é onde o dinheiro costuma escapar.'
           : querTrafego
@@ -548,7 +548,7 @@ export const NAO_FAZEMOS = [
   {
     titulo: 'Prometer primeiro lugar no Google',
     texto:
-      'Ninguém controla a posição orgânica — o próprio Google diz isso. A gente controla o que é nosso: um site rápido, claro e bem estruturado.',
+      'Ninguém controla a posição orgânica: o próprio Google diz isso. A gente controla o que é nosso: um site rápido, claro e bem estruturado.',
   },
   {
     titulo: 'Prometer número de vendas',
@@ -586,7 +586,7 @@ export const NOME_SIGNIFICADO = {
   titulo: 'Abram, para nós, é',
   enfase: 'exaltar a Deus.',
   texto:
-    'Somos cristãos. O nome lembra o porquê do trabalho: fazer cada site e cada campanha como quem faz para Deus — com verdade no que prometemos e capricho até no que ninguém vê. É por isso que a lista do que a gente não faz existe.',
+    'Somos cristãos. O nome lembra o porquê do trabalho: fazer cada site e cada campanha como quem faz para Deus: com verdade no que prometemos e capricho até no que ninguém vê. É por isso que a lista do que a gente não faz existe.',
   versiculo:
     'Tudo o que fizerem, façam de todo o coração, como para o Senhor, e não para os homens.',
   referencia: 'Colossenses 3:23',
@@ -628,7 +628,7 @@ export const FAQ = [
   {
     pergunta: 'Atendem outras cidades?',
     resposta:
-      'Sim. Tudo funciona por WhatsApp e videochamada — já entregamos sites para negócios em Goiás e em Minas Gerais.',
+      'Sim. Tudo funciona por WhatsApp e videochamada: já entregamos sites para negócios em Goiás e em Minas Gerais.',
   },
 ] as const
 
@@ -678,6 +678,6 @@ export const PRIVACIDADE = [
   },
   {
     titulo: 'Seus direitos',
-    texto: `A Lei Geral de Proteção de Dados (Lei 13.709/2018) garante acesso, correção e exclusão dos seus dados. Como o site não guarda dados pessoais, o que existir estará na conversa do WhatsApp — e pode ser pedido por lá, no (62) 9355-7730.`,
+    texto: `A Lei Geral de Proteção de Dados (Lei 13.709/2018) garante acesso, correção e exclusão dos seus dados. Como o site não guarda dados pessoais, o que existir estará na conversa do WhatsApp, e pode ser pedido por lá, no (62) 9355-7730.`,
   },
 ] as const

@@ -180,7 +180,7 @@ export function Trabalhos() {
             rotulo="Trabalhos"
             titulo="Não acredite em depoimento."
             enfase="Abra o site."
-            apoio="Nada de logo de cliente famoso nem número redondo. Estes são sites que fizemos — os que já têm endereço próprio, é só abrir."
+            apoio="Nada de logo de cliente famoso nem número redondo. Estes são sites que fizemos; os que já têm endereço próprio, é só abrir."
           />
         </div>
         <ul

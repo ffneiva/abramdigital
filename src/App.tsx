@@ -18,6 +18,8 @@ import { Heroi } from '@/sections/Heroi'
 /* A política de privacidade sai do bundle da home. */
 const Privacidade = lazy(() => import('@/pages/Privacidade'))
 const Servico = lazy(() => import('@/pages/Servico'))
+const Projeto = lazy(() => import('@/pages/Projeto'))
+const Sobre = lazy(() => import('@/pages/Sobre'))
 
 /* Tudo abaixo do herói: pedido já no carregamento, em paralelo (ver Resto). */
 const carregarResto = () => import('@/sections/Resto')
@@ -187,6 +189,8 @@ export default function App() {
           <Suspense fallback={<div className="min-h-[100svh] bg-noite" />}>
             {rota.path === '/politica-de-privacidade' && <Privacidade />}
             {rota.pagina && <Servico key={rota.pagina} slug={rota.pagina} />}
+            {rota.projeto && <Projeto key={rota.projeto} slug={rota.projeto} />}
+            {rota.path === '/sobre' && <Sobre />}
           </Suspense>
           {rota.path === '/404' && <NaoEncontrada />}
         </main>

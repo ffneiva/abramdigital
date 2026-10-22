@@ -709,3 +709,8 @@
     transform: none !important;
   }
 }
+
+/* Conteúdo pré-renderizado para robôs (scripts/prerender.mjs): invisível até o React montar a página viva. */
+#root[data-pre] {
+  visibility: hidden;
+}

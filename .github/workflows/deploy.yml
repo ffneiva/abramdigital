@@ -67,8 +67,15 @@ jobs:
       - name: 🧪 Testes
         run: npm test --if-present
 
+      # O build pré-renderiza cada página num Chromium (scripts/prerender.mjs):
+      # sem ele, os robôs que não executam JavaScript veriam páginas vazias.
+      - name: 🌐 Chromium para a pré-renderização
+        run: npx playwright install --with-deps chromium
+
       - name: 🏗️ Build
         run: npm run build
+        env:
+          PRERENDER_OBRIGATORIO: '1'
 
       - name: 🔐 Assumir a role na AWS (OIDC)
         uses: aws-actions/configure-aws-credentials@v5

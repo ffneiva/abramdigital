@@ -137,8 +137,15 @@ jobs:
       - name: 🖥️ Smoke test do dev server
         run: npm run check:dev
 
+      # O build pré-renderiza cada página num Chromium (scripts/prerender.mjs):
+      # sem ele, os robôs que não executam JavaScript veriam páginas vazias.
+      - name: 🌐 Chromium para a pré-renderização
+        run: npx playwright install --with-deps chromium
+
       - name: 🏗️ Build
         run: npm run build
+        env:
+          PRERENDER_OBRIGATORIO: '1'
 
       # O orçamento existe para pegar a regressão silenciosa: alguém importa uma
       # biblioteca de ícones inteira por causa de um ícone, o bundle dobra e

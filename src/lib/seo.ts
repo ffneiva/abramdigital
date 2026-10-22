@@ -12,7 +12,8 @@ import {
   TRABALHOS_PUBLICADOS,
 } from './business.ts'
 import { PAGINAS } from './paginas.ts'
-import { canonicalDe, ROTAS } from './routes.ts'
+import { PROJETOS, SOBRE } from './projetos.ts'
+import { canonicalDe, ogUrlDe, ROTAS } from './routes.ts'
 
 /**
  * Dados estruturados (JSON-LD) e llms.txt — ambos derivados de business.ts.
@@ -34,13 +35,21 @@ function noDaEmpresa() {
     ...(EMPRESA.google ? [EMPRESA.google] : []),
   ]
   return {
-    '@type': 'ProfessionalService',
+    '@type': ['Organization', 'ProfessionalService'],
     '@id': ID,
     name: EMPRESA.nome,
+    alternateName: 'Abram',
     slogan: EMPRESA.lema,
     description: EMPRESA.descricao,
     url: `${SITE_URL}/`,
-    logo: `${SITE_URL}/icon-512.png`,
+    logo: {
+      '@type': 'ImageObject',
+      '@id': `${SITE_URL}/#logo`,
+      url: `${SITE_URL}/icon-512.png`,
+      width: 512,
+      height: 512,
+      caption: EMPRESA.nome,
+    },
     image: `${SITE_URL}/og.jpg`,
     telephone: `+${EMPRESA.whatsapp}`,
     ...(EMPRESA.email ? { email: EMPRESA.email } : {}),
@@ -58,11 +67,22 @@ function noDaEmpresa() {
     knowsAbout: [
       'Criação de sites',
       'Landing pages',
+      'Sites 3D',
+      'Sites de empreendimentos imobiliários',
       'Google Ads',
       'Meta Ads',
       'Tráfego pago',
       'SEO técnico',
+      'Identidade visual',
     ],
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: `+${EMPRESA.whatsapp}`,
+      contactType: 'sales',
+      areaServed: 'BR',
+      availableLanguage: ['pt-BR'],
+      url: linkContato(),
+    },
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'Serviços',
@@ -93,9 +113,10 @@ function noDoSite() {
   }
 }
 
-function faq(itens: readonly { pergunta: string; resposta: string }[]) {
+function faq(itens: readonly { pergunta: string; resposta: string }[], id: string) {
   return {
     '@type': 'FAQPage',
+    '@id': id,
     mainEntity: itens.map((p) => ({
       '@type': 'Question',
       name: p.pergunta,
@@ -128,7 +149,7 @@ function noDoServico(slug: string) {
         name: 'Conversar no WhatsApp',
       },
     },
-    faq(p.perguntas),
+    faq(p.perguntas, `${url}#faq`),
   ]
 }
 
@@ -137,9 +158,12 @@ function trilha(path: string) {
   if (!rota || path === '/') return null
   const meio = rota.pagina
     ? [{ '@type': 'ListItem', position: 2, name: 'Serviços', item: `${SITE_URL}/#servicos` }]
-    : []
+    : rota.projeto
+      ? [{ '@type': 'ListItem', position: 2, name: 'Trabalhos', item: `${SITE_URL}/#trabalhos` }]
+      : []
   return {
     '@type': 'BreadcrumbList',
+    '@id': `${canonicalDe(rota)}#trilha`,
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Início', item: `${SITE_URL}/` },
       ...meio,
@@ -153,15 +177,73 @@ function trilha(path: string) {
   }
 }
 
+/** Estudo de caso: o site feito (CreativeWork) e o vídeo dele rolando. */
+function noDoProjeto(slug: string) {
+  const p = PROJETOS.find((x) => x.slug === slug)
+  if (!p) return []
+  const url = `${SITE_URL}/projetos/${p.slug}/`
+  return [
+    {
+      '@type': 'CreativeWork',
+      '@id': `${url}#projeto`,
+      name: `Site ${p.nome}`,
+      description: p.resumo,
+      url: p.url,
+      genre: p.segmento,
+      creator: { '@id': ID },
+      inLanguage: 'pt-BR',
+      keywords: p.tecnica.join(', '),
+      locationCreated: { '@type': 'Place', name: p.cidade },
+      video: { '@id': `${url}#video` },
+    },
+    {
+      '@type': 'VideoObject',
+      '@id': `${url}#video`,
+      name: `O site ${p.nome} rolando`,
+      description: p.resumo,
+      thumbnailUrl: `${SITE_URL}${p.poster}`,
+      contentUrl: `${SITE_URL}${p.video}.mp4`,
+      // Data em que a gravação foi publicada no site: fixa, não envelhece.
+      uploadDate: '2026-10-22',
+      publisher: { '@id': ID },
+    },
+  ]
+}
+
 /**
- * O grafo de uma rota: a empresa e o site em todas; o FAQ geral só na home;
- * nas páginas de serviço, o serviço e as perguntas dela.
+ * O grafo de uma rota: a empresa e o site em todas; a página (WebPage) com
+ * trilha e imagem; o FAQ geral só na home; serviço, estudo de caso ou sobre
+ * conforme a rota.
  */
 export function gerarJsonLd(path = '/') {
   const grafo: Record<string, unknown>[] = [noDaEmpresa(), noDoSite()]
-  if (path === '/') grafo.push(faq(FAQ))
   const rota = ROTAS.find((r) => r.path === path)
+  if (rota && !rota.noindex) {
+    const url = canonicalDe(rota)
+    const principal = rota.pagina
+      ? `${url}#servico`
+      : rota.projeto
+        ? `${url}#projeto`
+        : path === '/'
+          ? ID
+          : undefined
+    grafo.push({
+      '@type': path === '/sobre' ? 'AboutPage' : 'WebPage',
+      '@id': `${url}#pagina`,
+      url,
+      name: rota.titulo,
+      description: rota.descricao,
+      inLanguage: 'pt-BR',
+      isPartOf: { '@id': `${SITE_URL}/#site` },
+      about: { '@id': ID },
+      primaryImageOfPage: { '@type': 'ImageObject', url: ogUrlDe(rota), width: 1200, height: 630 },
+      ...(principal ? { mainEntity: { '@id': principal } } : {}),
+      ...(path !== '/' ? { breadcrumb: { '@id': `${url}#trilha` } } : {}),
+    })
+  }
+  if (path === '/') grafo.push(faq(FAQ, `${SITE_URL}/#faq`))
   if (rota?.pagina) grafo.push(...noDoServico(rota.pagina))
+  if (rota?.projeto) grafo.push(...noDoProjeto(rota.projeto))
   const b = trilha(path)
   if (b) grafo.push(b)
   return { '@context': 'https://schema.org', '@graph': grafo }
@@ -196,11 +278,17 @@ export function gerarLlmsTxt(): string {
     for (const q of p.perguntas) l.push(`**${q.pergunta}** ${q.resposta}`)
     l.push('')
   }
+  l.push('', '## Estudos de caso', '')
+  for (const p of PROJETOS)
+    l.push(
+      `- ${p.h1} (${p.segmento}, ${p.cidade}): ${SITE_URL}/projetos/${p.slug}/ . Site: ${p.url}`,
+    )
+  l.push('', `## Sobre`, '', `${SITE_URL}/sobre/`, '', SOBRE.resumo)
   l.push('', '## Trabalhos', '')
   for (const t of TRABALHOS_PUBLICADOS)
     l.push(`- ${t.nome} (${t.segmento}, ${t.cidade}): ${t.feito}.${t.url ? ` ${t.url}` : ''}`)
   l.push('', '## Método', '')
-  for (const e of ETAPAS) l.push(`${e.numero}. ${e.titulo} — ${e.texto}`)
+  for (const e of ETAPAS) l.push(`${e.numero}. ${e.titulo}: ${e.texto}`)
   l.push('', '## O que não fazemos', '')
   for (const n of NAO_FAZEMOS) l.push(`- ${n.titulo}: ${n.texto}`)
   l.push(
@@ -215,5 +303,23 @@ export function gerarLlmsTxt(): string {
     l.push(`- ${f.numero} ${f.unidade ?? ''} ${f.texto} (${f.fonte}: ${f.url})`)
   l.push('', '## Perguntas frequentes', '')
   for (const p of FAQ) l.push(`**${p.pergunta}**`, p.resposta, '')
+  return `${l.join('\n').trim()}\n`
+}
+
+/** llms-full.txt: o llms.txt mais o texto completo das páginas de serviço e dos estudos de caso. */
+export function gerarLlmsFullTxt(): string {
+  const l: string[] = [gerarLlmsTxt().trim(), '', '# Texto completo das páginas', '']
+  for (const p of PAGINAS) {
+    l.push(`## ${p.h1}`, '', `${SITE_URL}/servicos/${p.slug}/`, '', p.resumo, '')
+    for (const passo of p.passos) l.push(`- ${passo.titulo}: ${passo.texto}`)
+    l.push('')
+    for (const d of p.detalhe ?? []) l.push(`### ${d.titulo}`, '', ...d.texto, '')
+  }
+  for (const p of PROJETOS) {
+    l.push(`## ${p.h1}`, '', `${SITE_URL}/projetos/${p.slug}/`, '', p.resumo, '', ...p.desafio, '')
+    for (const x of p.solucao) l.push(`### ${x.titulo}`, '', x.texto, '')
+  }
+  l.push(`## ${SOBRE.h1}`, '', `${SITE_URL}/sobre/`, '', SOBRE.resumo, '')
+  for (const b of SOBRE.blocos) l.push(`### ${b.titulo}`, '', ...b.texto, '')
   return `${l.join('\n').trim()}\n`
 }

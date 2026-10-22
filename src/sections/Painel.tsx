@@ -37,7 +37,7 @@ function medir(): Medida[] {
   return [
     {
       id: 'tempo',
-      valor: pronta ? (pronta / 1000).toFixed(2).replace('.', ',') : '—',
+      valor: pronta ? (pronta / 1000).toFixed(2).replace('.', ',') : '...',
       unidade: 's',
       rotulo: 'Página pronta',
       nota: 'Do clique até o conteúdo interativo, neste aparelho e nesta rede.',
@@ -54,16 +54,16 @@ function medir(): Medida[] {
       valor: String(recursos.length + 1),
       unidade: 'arquivos',
       rotulo: 'Pedidos ao servidor',
-      nota: 'Tudo o que a página precisou buscar até agora — fontes, código, imagens e o próprio HTML.',
+      nota: 'Tudo o que a página precisou buscar até agora, fontes, código, imagens e o próprio HTML.',
     },
     {
       id: 'fps',
-      valor: telemetria.ativa ? Math.round(telemetria.fps).toString() : '—',
+      valor: telemetria.ativa ? Math.round(telemetria.fps).toString() : '...',
       unidade: 'fps',
       rotulo: 'Quadros por segundo',
       nota: telemetria.ativa
         ? `${telemetria.particulas.toLocaleString('pt-BR')} partículas desenhadas pelo seu processador gráfico.`
-        : 'O 3D está desligado aqui (movimento reduzido ou sem WebGL) — e o site funciona igual.',
+        : 'O 3D está desligado aqui (movimento reduzido ou sem WebGL), e o site funciona igual.',
     },
     {
       id: 'terceiros',

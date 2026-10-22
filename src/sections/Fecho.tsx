@@ -80,7 +80,7 @@ export function Fecho() {
           Toda constelação começa com <span className="enfase">um ponto.</span>
         </h2>
         <p className="mx-auto mt-6 max-w-[40ch] text-[1.08rem] leading-relaxed text-creme legivel">
-          O seu começa com uma mensagem. Conta o que você vende — a gente responde com o caminho.
+          O seu começa com uma mensagem. Conta o que você vende, a gente responde com o caminho.
         </p>
         <div className="mt-10 flex flex-col items-center gap-4">
           <Magnetic>

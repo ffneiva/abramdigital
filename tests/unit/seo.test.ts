@@ -54,7 +54,8 @@ describe('JSON-LD', () => {
   it('a empresa aparece em toda rota; FAQ só onde há perguntas na página', () => {
     for (const r of ROTAS) {
       const g = grafo(r.path)
-      expect(g[0]['@type']).toBe('ProfessionalService')
+      expect(g[0]['@type']).toEqual(['Organization', 'ProfessionalService'])
+      expect(g.some((n) => n['@type'] === 'WebPage' || n['@type'] === 'AboutPage')).toBe(true)
       expect(g.some((n) => n['@type'] === 'FAQPage')).toBe(r.path === '/' || Boolean(r.pagina))
     }
   })

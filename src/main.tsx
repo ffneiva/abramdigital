@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+import { StrictMode, useLayoutEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App'
 import { ErrorBoundary } from './components/ErrorBoundary'
@@ -10,10 +10,24 @@ import { iniciarObservabilidade, medirWebVitals } from './lib/observability'
 // partir de src/lib/seo.ts e o grava direto no HTML durante o build, para que o
 // dado estruturado chegue mesmo a crawlers que não executam JavaScript.
 
+/**
+ * O HTML de cada rota chega com o conteúdo pré-renderizado dentro do #root
+ * (scripts/prerender.mjs), escondido por `#root[data-pre]` no CSS: ele existe
+ * para os robôs que não executam JavaScript. O React substitui esse conteúdo
+ * pelo mesmo, vivo, e só então o atributo sai: ninguém vê duas versões.
+ */
+function Montado() {
+  useLayoutEffect(() => {
+    document.getElementById('root')?.removeAttribute('data-pre')
+  }, [])
+  return null
+}
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ErrorBoundary>
       <App />
+      <Montado />
     </ErrorBoundary>
   </StrictMode>,
 )

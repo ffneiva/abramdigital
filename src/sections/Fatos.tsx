@@ -46,7 +46,7 @@ export function Fatos() {
             rotulo="Por que juntas"
             titulo="O Google cobra"
             enfase="pela sua página."
-            apoio="Não é opinião nossa. A página que recebe o clique entra na conta do anúncio — e na paciência de quem chega pelo celular."
+            apoio="Não é opinião nossa. A página que recebe o clique entra na conta do anúncio, e na paciência de quem chega pelo celular."
           />
           <ol className="grid gap-5">
             {FATOS.map((f, i) => (
