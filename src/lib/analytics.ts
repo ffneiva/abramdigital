@@ -52,7 +52,7 @@ function paginaVista(): void {
   window.fbq('track', 'PageView')
 }
 
-export function iniciarPixel(): void {
+function iniciarPixel(): void {
   if (!PIXEL_ID || window.fbq || typeof document === 'undefined') return
   const fbq = ((...args: unknown[]) => {
     if (fbq.callMethod) fbq.callMethod(...args)
