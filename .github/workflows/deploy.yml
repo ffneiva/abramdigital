@@ -5,7 +5,7 @@
 #
 #   Secrets:    AWS_ROLE_ARN
 #   Variables:  AWS_REGION, S3_BUCKET_NAME, S3_WEBSITE_ENDPOINT, SITE_DOMINIO,
-#               ROTAS (opcional)
+#               ROTAS (opcional), VITE_META_PIXEL_ID (Pixel da Meta)
 #   Environment: production (a role da AWS só confia nele)
 #
 # Sem purge da Cloudflare: o HTML vai com "max-age=0, must-revalidate" e a
@@ -76,6 +76,7 @@ jobs:
         run: npm run build
         env:
           PRERENDER_OBRIGATORIO: '1'
+          VITE_META_PIXEL_ID: ${{ vars.VITE_META_PIXEL_ID }}
 
       - name: 🔐 Assumir a role na AWS (OIDC)
         uses: aws-actions/configure-aws-credentials@v5

@@ -29,12 +29,12 @@ export const EMPRESA = {
   descricao:
     'Sites sob medida e tráfego pago no Google e no Meta, feitos pela mesma equipe, para o clique que você paga cair numa página feita para virar conversa.',
   /**
-   * O WhatsApp, só dígitos com DDI e DDD (+55 62 99355-7730).
-   * Celular sempre com 9 dígitos depois do DDD
-   * (confirmado pelo Felipe em 22/10/2026).
+   * O WhatsApp, só dígitos com DDI e DDD (+55 62 99484-6183).
+   * Celular sempre com 9 dígitos depois do DDD. Número novo passado pelo
+   * Carmelito em 03/11/2026 (antes, 99355-7730).
    */
-  whatsapp: '5562993557730',
-  telefone: '(62) 99355-7730',
+  whatsapp: '5562994846183',
+  telefone: '(62) 99484-6183',
   /** O perfil do Instagram, sem @ (passado pelo Carmelito em 06/10/2026). */
   instagram: 'abramdigital.br' as string | null,
   /** O perfil no Google Maps (Google Business), pronto desde 06/10/2026. */
@@ -653,13 +653,14 @@ export const NAO_ENCONTRADA_TEXTO = {
 
 /**
  * A política de privacidade. O site não tem formulário, não tem login e
- * não grava cookie próprio. O que vai para o WhatsApp é a pessoa quem envia.
+ * não grava cookie próprio; o Pixel da Meta (anúncios, desde 06/11/2026)
+ * grava os da Meta. O que vai para o WhatsApp é a pessoa quem envia.
  */
 export const PRIVACIDADE = [
   {
     titulo: 'O que o site coleta',
     texto:
-      'Nada que identifique você. Não há formulário, cadastro nem login. O diagnóstico roda inteiro no seu navegador: as respostas não são enviadas a lugar nenhum até você tocar no botão do WhatsApp.',
+      'O site em si não guarda nada que identifique você: não há formulário, cadastro nem login (a medição de anúncios está descrita abaixo). O diagnóstico roda inteiro no seu navegador: as respostas não são enviadas a lugar nenhum até você tocar no botão do WhatsApp.',
   },
   {
     titulo: 'O WhatsApp',
@@ -669,7 +670,7 @@ export const PRIVACIDADE = [
   {
     titulo: 'Cookies e medição',
     texto:
-      'Este site não grava cookies próprios. Se uma ferramenta de medição de visitas (como o Google Analytics) for ligada, ela é descrita aqui antes, com o que coleta e por quê.',
+      'Este site não grava cookies próprios. Ele usa o Pixel da Meta (empresa do Facebook e do Instagram) para medir as visitas que chegam pelos nossos anúncios e os cliques no botão do WhatsApp. O Pixel pode gravar cookies da Meta no seu navegador e enviar a ela dados técnicos da visita (página, aparelho, endereço IP), tratados pela política de privacidade da própria Meta. Você pode limitar isso nas configurações de anúncios do Facebook e do Instagram ou bloquear cookies de terceiros no navegador.',
   },
   {
     titulo: 'O que fica no seu aparelho',
@@ -678,6 +679,6 @@ export const PRIVACIDADE = [
   },
   {
     titulo: 'Seus direitos',
-    texto: `A Lei Geral de Proteção de Dados (Lei 13.709/2018) garante acesso, correção e exclusão dos seus dados. Como o site não guarda dados pessoais, o que existir estará na conversa do WhatsApp, e pode ser pedido por lá, no (62) 99355-7730.`,
+    texto: `A Lei Geral de Proteção de Dados (Lei 13.709/2018) garante acesso, correção e exclusão dos seus dados. Como o site não guarda dados pessoais, o que existir estará na conversa do WhatsApp, e pode ser pedido por lá, no (62) 99484-6183.`,
   },
 ] as const

@@ -26,7 +26,9 @@ function paginas(dir = DIST, saida = []) {
   for (const nome of readdirSync(dir)) {
     const c = path.join(dir, nome)
     if (statSync(c).isDirectory()) paginas(c, saida)
-    else if (nome === 'index.html') saida.push(c)
+    // Páginas estáticas de public/ (a landing /sites/, por exemplo) não têm o
+    // #root do React: já saem prontas e não passam pelo pré-render.
+    else if (nome === 'index.html' && readFileSync(c, 'utf8').includes('id="root"')) saida.push(c)
   }
   return saida
 }
